@@ -11,7 +11,10 @@ class Cart
     
     total = 0
     while @ordered_items.size >  0
-      if @ordered_items.size == 4       # 如果買了一組4集，要依原價打 15% 折扣
+      if @ordered_items.size == 5       # 如果買了一組5集，要依原價打 20% 折扣
+        total = total + 5 * PRICE * 0.8
+        @ordered_items = @ordered_items.map {|item| item -1}
+      elsif @ordered_items.size == 4       # 如果買了一組4集，要依原價打 15% 折扣
         total = total + 4 * PRICE * 0.85
         @ordered_items = @ordered_items.map {|item| item -1}
       elsif @ordered_items.size == 3       # 如果買了一組3集，要依原價打 10% 折扣
