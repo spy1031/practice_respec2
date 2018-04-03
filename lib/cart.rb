@@ -11,8 +11,10 @@ class Cart
     
     total = 0
     while @ordered_items.size >  0
-      puts @ordered_items
-      if @ordered_items.size == 2       # 如果買了一組，要依原價打 5% 折扣
+      if @ordered_items.size == 3       # 如果買了一組3集，要依原價打 10% 折扣
+        total = total + 3 * PRICE * 0.90
+        @ordered_items = @ordered_items.map {|item| item -1}
+      elsif @ordered_items.size == 2       # 如果買了一組2集，要依原價打 5% 折扣
         total = total + 2 * PRICE * 0.95
         @ordered_items = @ordered_items.map {|item| item -1}
       else
@@ -24,7 +26,6 @@ class Cart
       end
 
       @ordered_items = @ordered_items.delete_if{ |i| i == 0 } # 刪除客戶沒有買的哈利波特集數
-      puts @ordered_items
     end
     return total
   end
